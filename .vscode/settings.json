@@ -1,0 +1,12 @@
+{
+  // "editor.fontFamily": "Fira Code,Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.codeActionsOnSave": {},
+  "editor.formatOnSave": true,
+  "editor.fontSize": 14,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  },
+  "python.formatting.provider": "none"
+}

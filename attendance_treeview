@@ -1,0 +1,36 @@
+import tkinter as tk
+import csv
+from tkinter import ttk
+
+class CSVTreeView(tk.Frame):
+    def __init__(self, parent, csv_file):
+        tk.Frame.__init__(self, parent)
+        self.treeview = ttk.Treeview(self, columns=[str(i) for i in range(100)], show="headings")
+        self.treeview.pack(side="left", fill="both", expand=True)
+
+        # read CSV file and get the header row
+        with open(csv_file, "r") as f:
+            reader = csv.reader(f)
+            headers = next(reader)
+
+        # set the column headings of the treeview
+        for i, header in enumerate(headers):
+            self.treeview.heading(str(i), text=header)
+
+        # populate the treeview with data
+        with open(csv_file, "r") as f:
+            reader = csv.reader(f)
+            next(reader) # skip the header row
+            for row in reader:
+                self.treeview.insert("", "end", values=row)
+
+        # add scrollbar to the treeview
+        scrollbar = ttk.Scrollbar(self, orient="vertical", command=self.treeview.yview)
+        scrollbar.pack(side="right", fill="y")
+        self.treeview.configure(yscrollcommand=scrollbar.set)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    csv_treeview = CSVTreeView(root, ".csv")
+    csv_treeview.pack(fill="both", expand=True)
+    root.mainloop()
